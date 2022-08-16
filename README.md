@@ -11,7 +11,7 @@
 8. gem install 'rubyXL'
 
 ## Steps to use the script:
-1. Copy the code and save it in a file (lets say automation.rb)
+1. Copy the code in automation_script.rb file and save it in a file (lets say automation.rb)
 2. Download the excel sheet (lets say sample_sheet.xlsx)
 3. Command to execute: `ruby  automation.rb  sample_sheet.xlsx` (ruby [space] path/to/script.rb [space] path/to/excel_file.xlsx)
 
