@@ -11,7 +11,7 @@ require 'rubyXL/convenience_methods'
 
 # Static things that needs to be changed are cohort_id and img_url
 def img_url
-    @img_url
+    @img_url.gsub(' ', '')
 end
 
 def content
@@ -74,13 +74,12 @@ worksheet.add_cell(0, high_accurate_page_col, 'high_accurate_page')
 @match_count = 0
 @total_count = 0
 worksheet.each_with_index do |row, row_index|
-    next if !row || row_index == 0 || worksheet[row_index][img_col].nil? || worksheet[row_index][cohort_col].nil?
+    next if !row || row_index == 0 || worksheet[row_index][img_col].value.nil? || worksheet[row_index][cohort_col].value.nil?
     row.cells.each_with_index do |cell, col_index|
         @img_url = cell.value if col_index == img_col
         @cohort_id = cell.value if col_index == cohort_col
     end
     response = get_response
-    # byebug
     puts "\nResponse for row #{row_index} => \n#{response}"
 
     #result_page_key
