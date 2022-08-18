@@ -79,31 +79,35 @@ worksheet.each_with_index do |row, row_index|
         @img_url = cell.value if col_index == img_col
         @cohort_id = cell.value if col_index == cohort_col
     end
-    response = get_response
-    puts "\nResponse for row #{row_index} => \n#{response}"
+    begin 
+        response = get_response
+        puts "\nResponse for row #{row_index} => \n#{response}"
 
-    #result_page_key
-    result_page_key = response['metadata']['pid']
-    worksheet.add_cell(row_index, result_page_key_col, result_page_key)
-    if result_page_key != worksheet[row_index][key_col].value
-        # byebug
-        worksheet.sheet_data[row_index][result_page_key_col].change_fill('ff337e')
-    else
-        @match_count = @match_count + 1
+        #result_page_key
+        result_page_key = response['metadata']['pid']
+        worksheet.add_cell(row_index, result_page_key_col, result_page_key)
+        if result_page_key != worksheet[row_index][key_col].value
+
+            worksheet.sheet_data[row_index][result_page_key_col].change_fill('ff337e')
+        else
+            @match_count = @match_count + 1
+        end
+        @total_count = @total_count + 1
+
+        #results_found
+        results = response['results']
+        worksheet.add_cell(row_index, results_found_col, (!results.empty?).to_s)
+
+        #high_accurate_result
+        high_accurate_result_found = !response['metadata']['accurate']['pid'].to_s.empty? rescue 'false'
+        worksheet.add_cell(row_index, high_accurate_result_col, high_accurate_result_found.to_s)
+
+        #high_accurate_page
+        high_accurate_page = response['metadata']['accurate']['pid'] || 'Not Found'
+        worksheet.add_cell(row_index, high_accurate_page_col, high_accurate_page)
+    rescue => e
+        worksheet.add_cell(row_index, result_page_key_col, "An Exception occured")
     end
-    @total_count = @total_count + 1
-
-    #results_found
-    results = response['results']
-    worksheet.add_cell(row_index, results_found_col, (!results.empty?).to_s)
-
-    #high_accurate_result
-    high_accurate_result_found = !response['metadata']['accurate']['pid'].to_s.empty? rescue 'false'
-    worksheet.add_cell(row_index, high_accurate_result_col, high_accurate_result_found.to_s)
-
-    #high_accurate_page
-    high_accurate_page = response['metadata']['accurate']['pid'] || 'Not Found'
-    worksheet.add_cell(row_index, high_accurate_page_col, high_accurate_page)
     
     @last_index = row_index
 end
