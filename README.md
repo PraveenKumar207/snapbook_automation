@@ -1,7 +1,7 @@
 # snapbook_automation
 
 ## Setup:
-1. You should have ruby installed by default. If not install ruby by `brew install ruby`
+1. Install ruby by `brew install ruby`
 2. Install rvm and install ruby 2.6.6. Refer [this](https://nrogap.medium.com/install-rvm-in-macos-step-by-step-d3b3c236953b) write up.
 3. gem install 'net/http'
 4. gem install 'uri'
