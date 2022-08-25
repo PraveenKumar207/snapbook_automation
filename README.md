@@ -2,13 +2,14 @@
 
 ## Setup:
 1. You should have ruby installed by default. If not install ruby by `brew install ruby`
-2. gem install 'net/http'
-3. gem install 'uri'
-4. gem install 'base64'
-5. gem install 'open-uri'
-6. gem install 'json'
-7. gem install 'byebug'
-8. gem install 'rubyXL'
+2. Install rvm and install ruby 2.6.6. Refer [this](https://nrogap.medium.com/install-rvm-in-macos-step-by-step-d3b3c236953b) write up.
+3. gem install 'net/http'
+4. gem install 'uri'
+5. gem install 'base64'
+6. gem install 'open-uri'
+7. gem install 'json'
+8. gem install 'byebug'
+9. gem install 'rubyXL'
 
 ## Steps to use the script:
 1. Copy the code in automation_script.rb file and save it in a file (lets say automation.rb)
